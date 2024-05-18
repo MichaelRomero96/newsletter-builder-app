@@ -1,10 +1,10 @@
-import { fetchUserData } from './services/api';
+import { LoginButton } from './components/LoginButton';
 
-export default async function Home() {
-  const userData = await fetchUserData();
+export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {JSON.stringify(userData, null, 2)}
-    </main>
+    <div>
+      <h1>Home</h1>
+      <LoginButton />
+    </div>
   );
 }
