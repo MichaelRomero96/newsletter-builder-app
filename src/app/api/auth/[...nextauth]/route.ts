@@ -1,6 +1,8 @@
 import NextAuth, { User } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
+import UsersController from '../../../../server/controllers/users';
+import Password from '@/server/utils/password';
 
 const getCredentialsProvider = () => {
   return Credentials({
@@ -13,9 +15,20 @@ const getCredentialsProvider = () => {
       credentials: Partial<Record<'email' | 'password', unknown>>,
       request: Request
     ) {
-      const response = await fetch(request);
-      if (!response.ok) return null;
-      return (await response.json()) ?? null;
+      const { email, password } = credentials;
+
+      const userFound = await UsersController.findByEmail(email as string);
+
+      if (!userFound) return null;
+
+      const isMatch = await Password.compare(
+        password as string,
+        userFound.password
+      );
+
+      if (!isMatch) return null;
+
+      return { userFound: { ...userFound, id: String(userFound.id) } } as User;
     },
   });
 };

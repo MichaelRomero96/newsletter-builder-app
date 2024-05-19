@@ -1,7 +1,7 @@
 // tests/emailService.test.ts
 import EmailSenderService from '../../src/server/services/emailSender';
 
-describe('EmailService', () => {
+describe('EmailSenderService', () => {
   it('should create a singleton instance', () => {
     const instance1 = EmailSenderService.getInstance();
     const instance2 = EmailSenderService.getInstance();

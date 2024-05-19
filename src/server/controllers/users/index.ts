@@ -1,5 +1,5 @@
 import { UserErrors } from '../../../constants/user/errors';
-import PasswordEncryptor from '../../../server/utils/passwordEncryptor';
+import PasswordEncryptor from '../../utils/password';
 import db from '../../services/db';
 import { Prisma } from '@prisma/client';
 

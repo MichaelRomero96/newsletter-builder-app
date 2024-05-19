@@ -20,4 +20,37 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  emailTemplates EmailTemplate[]
+}
+
+model EmailTemplate {
+  id        Int   @id @default(autoincrement())
+  type      String
+  name      String
+  subject   String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  attachments Attachment[]
+  sentEmails  SentEmail[]
+}
+
+model Attachment {
+  id            Int         @id @default(autoincrement())
+  type          String
+  name          String
+  url           String
+  emailTemplateId Int
+  emailTemplate EmailTemplate @relation(fields: [emailTemplateId], references: [id])
+}
+
+model SentEmail {
+  id          Int         @id @default(autoincrement())
+  sentAt      DateTime    @default(now())
+  recipient   String
+  status      String
+  templateId  Int
+  emailTemplate EmailTemplate @relation(fields: [templateId], references: [id])
 }
