@@ -16,7 +16,7 @@ datasource db {
 model User {
   id        Int   @id @default(autoincrement())
   email     String   @unique
-  name      String?
+  name      String
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -31,8 +31,8 @@ model EmailTemplate {
   body      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  userId    Int?
+  user      User?     @relation(fields: [userId], references: [id])
   attachments Attachment[]
   sentEmails  SentEmail[]
 }
@@ -42,8 +42,8 @@ model Attachment {
   type          String
   name          String
   url           String
-  emailTemplateId Int
-  emailTemplate EmailTemplate @relation(fields: [emailTemplateId], references: [id])
+  emailTemplateId Int?
+  emailTemplate EmailTemplate? @relation(fields: [emailTemplateId], references: [id])
 }
 
 model SentEmail {
@@ -51,6 +51,6 @@ model SentEmail {
   sentAt      DateTime    @default(now())
   recipient   String
   status      String
-  templateId  Int
-  emailTemplate EmailTemplate @relation(fields: [templateId], references: [id])
+  templateId  Int?
+  emailTemplate EmailTemplate? @relation(fields: [templateId], references: [id])
 }
