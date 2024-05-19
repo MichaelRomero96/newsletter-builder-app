@@ -2,10 +2,10 @@ export interface ISendEmail {
   from: string;
   to: string[];
   subject: string;
-  text: string;
+  html: string;
 }
 
-export interface CreateEmailResponse {
+export interface CreateEmailSenderEmailResponse {
   data: CreateEmailResponseSuccess | null;
   error: ErrorResponse | null;
 }
@@ -37,3 +37,9 @@ declare const RESEND_ERROR_CODES_BY_KEY: {
 };
 
 type RESEND_ERROR_CODE_KEY = keyof typeof RESEND_ERROR_CODES_BY_KEY;
+
+export enum SEND_EMAIL_STATUS {
+  SENT = 'Sent',
+  PENDING = 'Pending',
+  FAILED = 'Failed',
+}

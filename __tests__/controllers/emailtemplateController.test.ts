@@ -8,7 +8,8 @@ describe('emailtemplateController', () => {
   const newTemplate = {
     name: 'Sample Template',
     subject: 'Test Subject',
-    body: '<h1>Hello world</h1>',
+    from: 'Acme <onboarding@resend.dev>',
+    html: '<h1>Hello world</h1>',
     type: 'newsletter',
   };
 
@@ -33,7 +34,6 @@ describe('emailtemplateController', () => {
     const userInformation = await EmailTemplateController.getAllByUserId(
       user.id
     );
-    console.table(userInformation?.emailTemplates);
     expect(userInformation?.emailTemplates).toHaveLength(1);
   });
 

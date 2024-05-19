@@ -14,43 +14,55 @@ datasource db {
 }
 
 model User {
-  id        Int   @id @default(autoincrement())
-  email     String   @unique
-  name      String
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int        @id @default(autoincrement())
+  email          String     @unique
+  name           String
+  password       String
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
   emailTemplates EmailTemplate[]
+  recipients     Recipient[]
+}
+
+model Recipient {
+  id          Int     @id @default(autoincrement())
+  email       String
+  userId      Int
+  user        User    @relation(fields: [userId], references: [id])
 }
 
 model EmailTemplate {
-  id        Int   @id @default(autoincrement())
-  type      String
-  name      String
-  subject   String
-  body      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    Int?
-  user      User?     @relation(fields: [userId], references: [id])
+  id          Int   @id @default(autoincrement())
+  type        String
+  name        String
+  subject     String
+  html        String
+  from        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int?
+  user        User?     @relation(fields: [userId], references: [id])
   attachments Attachment[]
   sentEmails  SentEmail[]
 }
 
 model Attachment {
-  id            Int         @id @default(autoincrement())
-  type          String
-  name          String
-  url           String
+  id              Int            @id @default(autoincrement())
+  type            String
+  name            String
+  url             String
   emailTemplateId Int?
-  emailTemplate EmailTemplate? @relation(fields: [emailTemplateId], references: [id])
+  emailTemplate   EmailTemplate? @relation(fields: [emailTemplateId], references: [id])
 }
 
 model SentEmail {
-  id          Int         @id @default(autoincrement())
-  sentAt      DateTime    @default(now())
-  recipient   String
-  status      String
-  templateId  Int?
-  emailTemplate EmailTemplate? @relation(fields: [templateId], references: [id])
+  id               Int            @id @default(autoincrement())
+  sentAt           DateTime       @default(now())
+  subject          String
+  from             String
+  to               String[]
+  emailServiceId   String         // id returned by Resend API
+  status           String
+  templateId       Int?
+  emailTemplate    EmailTemplate? @relation(fields: [templateId], references: [id])
 }
