@@ -1,4 +1,4 @@
-import EmailSenderController from '../../src/app/api/controllers/emailSender';
+import EmailSenderController from '../../src/server/controllers/emailSender';
 
 describe('EmailSenderController', () => {
   it('Successfully deliver an email', async () => {

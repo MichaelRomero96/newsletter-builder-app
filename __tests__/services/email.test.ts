@@ -1,5 +1,5 @@
 // tests/emailService.test.ts
-import EmailSenderService from '../../src/app/api/services/emailSender';
+import EmailSenderService from '../../src/server/services/emailSender';
 
 describe('EmailService', () => {
   it('should create a singleton instance', () => {
