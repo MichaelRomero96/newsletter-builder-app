@@ -1,5 +1,8 @@
+'use client';
+import EmailTemplateEditor from '@/components/EmailTemplateEditor';
+
 const EmailTemplatesPage = () => {
-  return <div>EmailTemplatesPage</div>;
+  return <EmailTemplateEditor />;
 };
 
 export default EmailTemplatesPage;

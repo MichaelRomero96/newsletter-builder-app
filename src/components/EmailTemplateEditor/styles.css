@@ -1,0 +1,86 @@
+/* Change the background color of the panels */
+.gjs-pn-panels,
+.gjs-pn-commands,
+.gjs-pn-options,
+.gjs-pn-views {
+	background-color: #fff !important;
+}
+
+/* Change the color of the text in the panels */
+.gjs-pn-panels * {
+	color: rgb(202, 202, 202) !important;
+}
+
+.gjs-pn-buttons span {
+	color: #3B82F6 !important;
+
+}
+
+.gjs-block .gjs-block-label {
+	font-size: 13px;
+	color: #3B82F6 !important;
+}
+
+.gjs-pn-devices-c {
+	background-color: #fff !important;
+}
+
+.gjs-device-label {
+	font-size: 14px;
+	font-weight: bold;
+	color: #3B82F6 !important;
+}
+
+.gjs-blocks-cs {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.gjs-field gjs-select {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.gjs-pn-panel {
+	box-shadow: none !important;
+}
+
+.gjs-pn-devices-c {
+	height: 30px;
+}
+
+.gjs-devices {
+	background-color: #f0f0f0 !important;
+}
+
+/* Change the background color of the canvas */
+.gjs-cv-canvas {
+	background-color: #f0f0f0 !important;
+}
+
+/* Change the color of the block labels */
+.gjs-block-label {
+	color: blue !important;
+}
+
+/* Change the background color of the device and blocks sections */
+.gjs-pn-devices,
+.gjs-pn-blocks {
+	background-color: #fff !important;
+}
+
+/* Change the color of the text in the device and blocks sections */
+.gjs-pn-devices *,
+.gjs-pn-blocks * {
+	color: #000 !important;
+}
+
+/* Change the background color of the blocks */
+.gjs-block {
+	background-color: #f0f0f0 !important;
+}
+
+/* Change the color of the block labels */
+.gjs-block-label {
+	color: #000 !important;
+}
