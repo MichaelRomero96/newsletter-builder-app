@@ -1,5 +1,5 @@
 import { UserErrors } from '../../src/constants/user/errors';
-import UsersController from '../../src/server/controllers/users';
+import UsersController from '../../src/server/controllers/user';
 
 describe('UsersController', () => {
   const testUser = {

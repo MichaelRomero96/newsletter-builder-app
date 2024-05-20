@@ -1,4 +1,4 @@
-import Users from '@/server/controllers/users';
+import Users from '@/server/controllers/user';
 import { NextResponse, NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {

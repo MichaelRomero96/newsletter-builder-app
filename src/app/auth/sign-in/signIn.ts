@@ -16,12 +16,6 @@ const signIn = async (email: string, password: string) => {
   });
 
   return res.ok;
-
-  /*  if (res.ok) {
-    router.push('/dashboard');
-  } else {
-    setIsError(true);
-  } */
 };
 
 export default signIn;

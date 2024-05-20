@@ -1,5 +1,5 @@
 import EmailSenderController from '../../src/server/controllers/emailSender';
-import UsersController from '../../src/server/controllers/users';
+import UsersController from '../../src/server/controllers/user';
 import EmailTemplateController from '../../src/server/controllers/emailTemplates';
 
 describe('EmailSenderController', () => {

@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "EmailTemplate" ALTER COLUMN "subject" DROP NOT NULL,
+ALTER COLUMN "from" DROP NOT NULL,
+ALTER COLUMN "html" DROP NOT NULL;

@@ -1,7 +1,7 @@
 import NextAuth, { User } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
-import UsersController from '../../../../server/controllers/users';
+import UsersController from '../../../../server/controllers/user';
 import Password from '@/server/utils/password';
 
 const getCredentialsProvider = () => {
