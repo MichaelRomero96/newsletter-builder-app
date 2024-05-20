@@ -9,16 +9,10 @@ interface Props extends ReactInputProps {
 }
 
 const TextField: FC<Props> = ({ label, value, ...props }) => {
-  const randomNumber = Math.floor(Math.random() * 100);
-  const id = label ? `${label}-${randomNumber}` : `${randomNumber}`;
   return (
     <div className="items-center gap-4">
-      {label && (
-        <Label htmlFor={id} className="text-right text-blue-500">
-          {label}
-        </Label>
-      )}
-      <Input id={id} value={value} className="mt-0.5 col-span-3" {...props} />
+      {label && <Label className="text-right text-blue-500">{label}</Label>}
+      <Input value={value} className="mt-0.5 col-span-3" {...props} />
     </div>
   );
 };

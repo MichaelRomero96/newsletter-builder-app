@@ -18,19 +18,19 @@ export const NavItems: NavItem[] = [
   {
     title: 'Home',
     icon: Home,
-    href: '/',
+    href: '/dashboard',
     color: 'text-blue-500',
   },
   {
     title: 'Email templates',
     icon: Mails,
-    href: '/email-templates',
+    href: '/dashboard/email-templates',
     color: 'text-blue-500',
   },
   {
     title: 'Recipients',
     icon: Contact,
-    href: '/recipients',
+    href: '/dashboard/recipients',
     color: 'text-blue-500',
   },
 ];

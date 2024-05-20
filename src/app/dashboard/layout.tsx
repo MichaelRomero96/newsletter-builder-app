@@ -1,5 +1,6 @@
 import { auth } from '@/app/api/auth/[...nextauth]/route';
 import MainLayout from '@/components/MainLayout';
+import { SessionProvider } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import React, { FC } from 'react';
 
@@ -13,7 +14,11 @@ const LoginPage: FC<Props> = async ({ children }) => {
     redirect('/auth/sign-in');
   }
 
-  return <MainLayout>{children}</MainLayout>;
+  return (
+    <SessionProvider>
+      <MainLayout>{children}</MainLayout>
+    </SessionProvider>
+  );
 };
 
 export default LoginPage;

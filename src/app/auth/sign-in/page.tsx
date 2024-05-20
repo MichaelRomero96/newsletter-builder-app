@@ -1,11 +1,40 @@
 'use client';
 import Button from '@/components/ui/Button';
 import TextField from '@/components/ui/TextField';
+import { getCsrfToken } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
+import signIn from './signIn';
 
 const SignInPage = () => {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  const handleSignIn = async (e: React.FormEvent) => {
+    setIsError(false);
+
+    const res = await signIn(email, password);
+
+    if (res) {
+      router.push('/dashboard');
+    } else {
+      setIsError(true);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isError) {
+      setIsError(false);
+    }
+    if (e.target.name === 'email') {
+      setEmail(e.target.value);
+    } else {
+      setPassword(e.target.value);
+    }
+  };
+
   const goToSignUp = () => router.push('/auth/sign-up');
   return (
     <div
@@ -46,10 +75,24 @@ const SignInPage = () => {
       <div style={{ margin: '0 80px' }}>
         <h2 className="text-2xl font-bold text-blue-500 mb-5">Sign in</h2>
         <div className="space-y-2">
-          <TextField label="Email" />
-          <TextField label="Password" type="password" />
+          <TextField name="email" label="Email" onChange={handleChange} />
+          <TextField
+            name="password"
+            label="Password"
+            type="password"
+            onChange={handleChange}
+          />
+          {isError && (
+            <div className="mt-4 text-center text-red-500">
+              User not found or password incorrect
+            </div>
+          )}
           <div className="pt-5">
-            <Button size="lg" className=" w-full bg-blue-500 hover:bg-blue-400">
+            <Button
+              onClick={handleSignIn}
+              size="lg"
+              className=" w-full bg-blue-500 hover:bg-blue-400"
+            >
               Sign in
             </Button>
             <div className="my-4 text-center">Or</div>

@@ -2,6 +2,8 @@ import { ThemeToggle } from './ThemeToggle';
 import { cn } from '../../../lib/utils';
 import { MobileSidebar } from '../Sidebar/MobileSidebar';
 import { LayoutPanelLeft } from 'lucide-react';
+import { signOut } from 'next-auth/react';
+import Button from '@/components/ui/Button';
 
 export default function Header() {
   return (
@@ -21,7 +23,12 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
+          <Button
+            onClick={() => signOut()}
+            className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-400"
+          >
+            Logout
+          </Button>
         </div>
       </nav>
     </div>

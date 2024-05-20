@@ -2,10 +2,49 @@
 import Button from '@/components/ui/Button';
 import TextField from '@/components/ui/TextField';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { use, useEffect, useState } from 'react';
+import createNewUser from './createNewUser';
 
 const SignUpPage = () => {
+  11;
   const router = useRouter();
+  const [user, setUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [error, setError] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    // validate passwords
+  };
+
+  const handleSignUp = async () => {
+    // validate passwords
+    if (user.password !== user.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    const { confirmPassword, ...newUser } = user;
+
+    // create new user
+    const response = await createNewUser(newUser);
+    if (response) {
+      router.push('/dashboard');
+    } else {
+      setError('An error occurred');
+    }
+  };
+
+  useEffect(() => {
+    if (user.password !== user.confirmPassword) {
+      setError('Passwords do not match');
+    }
+  }, [user]);
+
   const goToSignIn = () => router.push('/auth/sign-in');
   return (
     <div
@@ -48,13 +87,30 @@ const SignUpPage = () => {
           Create an Account
         </h2>
         <div className="space-y-2">
-          <TextField label="User name" />
-          <TextField label="Email" />
-          <TextField label="Password" type="password" />
-          <TextField label="Confirm Password" type="password" />
+          <TextField name="name" label="User name" onChange={handleChange} />
+          <TextField name="email" label="Email" onChange={handleChange} />
+          <TextField
+            name="password"
+            label="Password"
+            type="password"
+            onChange={handleChange}
+          />
+          <TextField
+            name="confirmPassword"
+            label="Confirm Password"
+            type="password"
+            onChange={handleChange}
+          />
+          {Boolean(error) && (
+            <div className="text-center text-red-500">{error}</div>
+          )}
           <div className="pt-5">
-            <Button size="lg" className=" w-full bg-blue-500 hover:bg-blue-400">
-              Register
+            <Button
+              onClick={handleSignUp}
+              size="lg"
+              className=" w-full bg-blue-500 hover:bg-blue-400"
+            >
+              Sign Up
             </Button>
             <div className="my-4 text-center">Or</div>
             <Button size="lg" className=" w-full bg-blue-500 hover:bg-blue-400">

@@ -19,16 +19,27 @@ const getCredentialsProvider = () => {
 
       const userFound = await UsersController.findByEmail(email as string);
 
-      if (!userFound) return null;
+      if (!userFound) {
+        throw new Error('No user found with this email');
+      }
 
       const isMatch = await Password.compare(
         password as string,
         userFound.password
       );
 
-      if (!isMatch) return null;
+      if (!isMatch) {
+        throw new Error('Incorrect password');
+      }
 
-      return { userFound: { ...userFound, id: String(userFound.id) } } as User;
+      if (userFound) {
+        return Promise.resolve({
+          ...userFound,
+          id: String(userFound.id),
+        } as User);
+      } else {
+        return Promise.resolve(null);
+      }
     },
   });
 };
@@ -48,6 +59,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
     getCredentialsProvider(),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (typeof token.user === 'object' && token.user !== null) {
+        session.user = {
+          ...token.user,
+          id: token.sub || '',
+          email: token.email || '',
+          emailVerified:
+            typeof token.email_verified === 'string'
+              ? new Date(token.email_verified)
+              : null,
+        };
+      }
+      return Promise.resolve(session);
+    },
+  },
 });
 
 export const { GET, POST } = handlers;
