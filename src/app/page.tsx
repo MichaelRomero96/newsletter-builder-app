@@ -1,10 +1,7 @@
-import { LoginButton } from '../components/LoginButton';
+'use client';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <LoginButton />
-    </div>
-  );
+  redirect('/dashboard');
+  return null;
 }

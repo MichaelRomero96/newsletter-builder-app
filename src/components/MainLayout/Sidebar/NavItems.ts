@@ -18,7 +18,7 @@ export const NavItems: NavItem[] = [
   {
     title: 'Home',
     icon: Home,
-    href: '/home',
+    href: '/',
     color: 'text-blue-500',
   },
   {

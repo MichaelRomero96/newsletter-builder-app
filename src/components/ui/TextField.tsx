@@ -14,7 +14,7 @@ const TextField: FC<Props> = ({ label, value, ...props }) => {
   return (
     <div className="items-center gap-4">
       {label && (
-        <Label htmlFor={id} className="text-right">
+        <Label htmlFor={id} className="text-right text-blue-500">
           {label}
         </Label>
       )}
