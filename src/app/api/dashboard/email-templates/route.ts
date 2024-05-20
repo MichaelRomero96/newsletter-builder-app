@@ -3,9 +3,15 @@ import EmailTemplatesController from '@/server/controllers/emailTemplates';
 export async function POST(request: Request) {
   const data = await request.json();
 
-  await EmailTemplatesController.create(data);
+  const response = await EmailTemplatesController.create(
+    data.userId,
+    data.emailTemplate
+  );
 
-  return new Response(JSON.stringify({ message: 'Hello, world!' }), {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  return new Response(
+    JSON.stringify({ data: response, message: 'Successfully Created' }),
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
 }

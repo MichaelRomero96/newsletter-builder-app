@@ -13,10 +13,12 @@ export default function useAuthSession() {
 
     const getUserId = async () => {
       const userId = window.localStorage.getItem('userId');
+
       if (userId) {
         setUserId(Number(userId));
         return;
       }
+
       const res = await fetch('/api/auth/user', {
         method: 'POST',
         headers: {
@@ -25,13 +27,19 @@ export default function useAuthSession() {
         body: JSON.stringify(session.user),
       });
 
+      if (!res.ok) {
+        setSession(null);
+        return;
+      }
+
       const data = await res.json();
-      await setUserId(data.id);
+
+      setUserId(data.id);
       window.localStorage.setItem('userId', data.id);
     };
 
     getUserId();
-  }, [session, setSession]);
+  }, [session]);
 
-  return { user: session.user || {}, id: userId };
+  return { user: session?.user || {}, id: userId };
 }

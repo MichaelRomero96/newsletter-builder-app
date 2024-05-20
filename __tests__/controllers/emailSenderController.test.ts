@@ -15,9 +15,9 @@ describe('EmailSenderController', () => {
     id: number;
     type: string;
     name: string;
-    subject: string;
-    from: string;
-    html: string;
+    subject: string | null;
+    from: string | null;
+    html: string | null;
     createdAt: Date;
     updatedAt: Date;
     userId: number | null;
@@ -54,9 +54,15 @@ describe('EmailSenderController', () => {
       subject: 'hello world',
       html: template.html,
     };
+
+    if (!template.from && !template.html) {
+      throw new Error('Template from is required');
+    }
+
     const response = await EmailSenderController.sendEmail(template.id, {
       ...email,
-      from: template.from,
+      from: template.from || '',
+      html: template.html || '',
     });
     emailId = response.id;
     expect(response).toBeDefined();

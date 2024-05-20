@@ -14,3 +14,7 @@ export interface ICreateEmailTemplate {
   from?: string;
   html?: string;
 }
+
+export enum EmailTemplateType {
+  NEWSLETTER = 'newsletter',
+}
