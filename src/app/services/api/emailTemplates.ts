@@ -61,6 +61,19 @@ class EmailTemplatesAPI {
     }
     return response.json();
   }
+
+  public static async delete(templateId: string) {
+    const response = await fetch(
+      `/api/dashboard/email-templates/${templateId}`,
+      {
+        method: 'DELETE',
+      }
+    );
+    if (!response.ok) {
+      throw new Error('Failed to delete email template');
+    }
+    return response.json();
+  }
 }
 
 export default EmailTemplatesAPI;

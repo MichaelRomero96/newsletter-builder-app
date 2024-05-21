@@ -50,62 +50,63 @@ const EmailTemplatesPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (!session) return;
-    const getEmailTemplates = async () => {
-      if (!session.id) return;
-      const data = await EmailTemplatesAPI.getAll(session.id);
+   const getEmailTemplates = async () => {
+     if (!session.id) return;
+     const data = await EmailTemplatesAPI.getAll(session.id);
 
-      setEmailTemplates(() => {
-        updateTemplates(data);
-        return data;
-      });
-    };
-    getEmailTemplates();
-  }, [session.id]);
+     setEmailTemplates(data);
+   };
 
-  return (
-    <>
-      <Page.Header
-        title="Email Templates"
-        toolbarActions={[
-          {
-            label: 'Create Template',
-            fn: () => setOpenDialog(true),
-          },
-        ]}
-      />
-      {emailTemplates.length < 0 && (
-        <div>
-          <div className="mt-14 grid justify-center gap-4">
-            <p>No emails templates yet</p>
-            <Button onClick={() => setOpenDialog(true)}>
-              Create Email Template
-            </Button>
-          </div>
-        </div>
-      )}
-      <div className="mt-8 grid gap-5 grid-cols-3">
-        {emailTemplates.map((emailTemplate) => (
-          <EmailPreview emailTemplate={emailTemplate} />
-        ))}
-      </div>
-      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="text-blue-500">
-              Create Email Template
-            </DialogTitle>
-            <CreateForm
-              handleChange={handleChange}
-              setOpenDialog={setOpenDialog}
-              submit={submit}
-            />
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
+   useEffect(() => {
+     if (!session) return;
+     getEmailTemplates();
+   }, [session.id]);
+
+   return (
+     <>
+       <Page.Header
+         title="Email Templates"
+         toolbarActions={[
+           {
+             label: 'Create Template',
+             fn: () => setOpenDialog(true),
+           },
+         ]}
+       />
+       {emailTemplates.length < 0 && (
+         <div>
+           <div className="mt-14 grid justify-center gap-4">
+             <p>No emails templates yet</p>
+             <Button onClick={() => setOpenDialog(true)}>
+               Create Email Template
+             </Button>
+           </div>
+         </div>
+       )}
+       <div className="mt-8 grid gap-5 grid-cols-3">
+         {emailTemplates.map((emailTemplate) => (
+           <EmailPreview
+             emailTemplate={emailTemplate}
+             refresh={getEmailTemplates}
+           />
+         ))}
+       </div>
+       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+         <DialogContent>
+           <DialogHeader>
+             <DialogTitle className="text-blue-500">
+               Create Email Template
+             </DialogTitle>
+             <CreateForm
+               handleChange={handleChange}
+               setOpenDialog={setOpenDialog}
+               submit={submit}
+             />
+           </DialogHeader>
+         </DialogContent>
+       </Dialog>
+     </>
+   );
 };
 
 export default EmailTemplatesPage;

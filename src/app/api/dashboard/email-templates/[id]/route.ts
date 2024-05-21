@@ -48,3 +48,22 @@ export async function PUT(
 
   return Response.json(data);
 }
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: { id: string } }
+) {
+  const templateId = params.id;
+
+  if (!templateId) {
+    throw new Error('Template ID is required');
+  }
+
+  const data = await EmailTemplatesController.delete(Number(templateId));
+
+  if (!data) {
+    throw new Error('Failed to delete email template');
+  }
+
+  return Response.json(data);
+}

@@ -1,24 +1,35 @@
 import EmailSenderService from '../../services/emailSender';
 import db from '../../services/db';
-import { CreateEmailSenderEmailResponse, ISendEmail } from './interfaces';
+import {
+  CreateEmailSenderEmailResponse,
+  ISendEmail,
+  ISendEmailWithAttachments,
+} from './interfaces';
 import { SEND_EMAIL_STATUS } from './interfaces';
 
 class EmailSenderController {
   public static async sendEmail(templateId: number, email: ISendEmail) {
     try {
-      const emailSenderService = EmailSenderService.getInstance();
-      console.log(emailSenderService);
-      console.log(email);
-      const sentEmail: CreateEmailSenderEmailResponse =
-        await emailSenderService.emails.send(email);
+      let parsedEmail = email.from;
+      // verify if the email contains 'resend.dev' domain, if not, set the domain to 'resend.dev'
+      // the email comes in this format: "name@domain.com"
+      // the email could be in this format: "<Name> email@domain.com"
+      // if it is, we need to just send the domain to 'resend.dev' keeping in mind the format
+      if (parsedEmail.includes('<')) {
+        parsedEmail = `<${parsedEmail.split('<')[1]}`;
+      } else if (!parsedEmail.includes('@resend.dev')) {
+        parsedEmail = `${parsedEmail.split('@')[0]}@resend.dev`;
+      }
 
-      console.log(sentEmail);
+      const emailSenderService = EmailSenderService.getInstance();
+      const sentEmail: CreateEmailSenderEmailResponse =
+        await emailSenderService.emails.send({ ...email, from: parsedEmail });
 
       if (sentEmail.error || !sentEmail.data) {
         throw new Error('Error sending email');
       }
 
-      const { html, ...rest } = email;
+      const { html, attachments, ...rest } = email as ISendEmailWithAttachments;
 
       const newEmail = await db.sentEmail.create({
         data: {

@@ -16,21 +16,9 @@ export interface NavItem {
 
 export const NavItems: NavItem[] = [
   {
-    title: 'Home',
-    icon: Home,
-    href: '/dashboard',
-    color: 'text-blue-500',
-  },
-  {
     title: 'Email templates',
     icon: Mails,
     href: '/dashboard/email-templates',
-    color: 'text-blue-500',
-  },
-  {
-    title: 'Recipients',
-    icon: Contact,
-    href: '/dashboard/recipients',
     color: 'text-blue-500',
   },
 ];

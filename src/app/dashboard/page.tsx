@@ -1,10 +1,14 @@
 'use client';
-import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const DashboardPage = () => {
-  const { data: session, status } = useSession();
+  const router = useRouter();
+  useEffect(() => {
+    router.push?.('/dashboard/email-templates');
+  }, []);
 
-  return <div>DashboardPage</div>;
+  return null;
 };
 
 export default DashboardPage;

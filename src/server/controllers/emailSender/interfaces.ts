@@ -5,6 +5,10 @@ export interface ISendEmail {
   html: string;
 }
 
+export interface ISendEmailWithAttachments extends ISendEmail {
+  attachments: string[];
+}
+
 export interface CreateEmailSenderEmailResponse {
   data: CreateEmailResponseSuccess | null;
   error: ErrorResponse | null;

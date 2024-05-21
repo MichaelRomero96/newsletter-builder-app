@@ -17,7 +17,12 @@ const CreateForm: FC<Props> = ({ setOpenDialog, handleChange, submit }) => {
         <TextField name="subject" label="Subject" onChange={handleChange} />
       </div>
       <div className="grid gap-3">
-        <TextField name="from" label="From" onChange={handleChange} />
+        <TextField
+          name="from"
+          label="From"
+          helper="Sandbox mode: All emails with unknown domains will be sent to the sandbox domain."
+          onChange={handleChange}
+        />
       </div>
       <div className="pt-4 flex justify-end space-x-2">
         <Button color="blue" onClick={() => setOpenDialog(false)}>
