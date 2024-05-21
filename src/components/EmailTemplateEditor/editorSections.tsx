@@ -18,27 +18,43 @@ import {
 } from 'lucide-react';
 
 const setEditorSections = (editor: Editor): void => {
-  editor.BlockManager.add('header-section', {
-    label: `<img src="${IconsUtils.convertIconComponentToSvg(<GalleryThumbnails color="#3B82F6" />)}" alt="Icon" style="width: 30px; height: 30px; margin: 0 auto;" /> Header`,
-    attributes: { class: 'gjs-block-section' },
-    content: `<table width="100%" style="background-color: #f0f0f0; padding: 20px;">
+ editor.BlockManager.add('header-section', {
+   label: `<img src="${IconsUtils.convertIconComponentToSvg(<GalleryThumbnails color="#3B82F6" />)}" alt="Icon" style="width: 30px; height: 30px; margin: 0 auto;" /> Header`,
+   attributes: { class: 'gjs-block-section' },
+   content: `<table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td><div style="height: 100px;"><img src="logo.png" alt="Logo" style="height: 100%; width: auto;"><h1>Newsletter Title</h1></div></td>
+                <td style="background-color: #f0f0f0; padding: 20px;">
+                  <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td style="height: 100px;">
+                        <img src="logo.png" alt="Logo" style="height: 100%; width: auto;">
+                        <h1 style="font-family: 'Sans Serif';">Newsletter Title</h1>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
               </tr>
             </table>`,
-  });
+ });
 
-  editor.BlockManager.add('hero', {
-    label: `<img src="${IconsUtils.convertIconComponentToSvg(<Fullscreen color="#3B82F6" />)}" alt="Icon" style="width: 30px; height: 30px; margin: 0 auto;" /> Hero`,
-    attributes: { class: 'gjs-block-hero' },
-    content: `<section style="padding: 100px 0; background-color: #f0f0f0; text-align: center; font-family: Arial, sans-serif;">
-    <div style="max-width: 960px; margin: auto; padding: 0 20px;">
-      <h1 style="font-size: 48px; margin-bottom: 50px;">Welcome to Our Website!</h1>
-      <p style="font-size: 24px; line-height: 1.6;">We provide the best service for you.</p>
-      <a href="#" style="display: inline-block; margin-top: 50px; padding: 10px 20px; background-color: #007BFF; color: #fff; text-decoration: none;">Learn More</a>
-    </div>
-  </section>`,
-  });
+ editor.BlockManager.add('hero', {
+   label: `<img src="${IconsUtils.convertIconComponentToSvg(<Fullscreen color="#3B82F6" />)}" alt="Icon" style="width: 30px; height: 30px; margin: 0 auto;" /> Hero`,
+   attributes: { class: 'gjs-block-hero' },
+   content: `<table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="center" style="padding: 100px 0; background-color: #f0f0f0; text-align: center; font-family: 'Sans Serif';">
+                  <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin: auto;">
+                    <tr>
+                      <td style="max-width: 960px; margin: auto; padding: 0 20px;">
+                        <h1 style="font-size: 48px; margin-bottom: 50px;">Welcome to Our Website!</h1>
+                        <p style="font-size: 24px; line-height: 1.6;">We provide the best service for you.</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>`,
+ });
   editor.BlockManager.add('section', {
     label: `<img src="${IconsUtils.convertIconComponentToSvg(<GalleryVertical color="#3B82F6" />)}" alt="Icon" style="width: 30px; height: 30px; margin: 0 auto;" /> Section`,
     attributes: { class: 'gjs-block-section' },

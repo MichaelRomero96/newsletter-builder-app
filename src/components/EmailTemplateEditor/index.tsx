@@ -4,9 +4,10 @@ LucideAArrowUp;
 import './styles.css';
 import { LucideAArrowUp, SaveIcon } from 'lucide-react';
 import setEditorSections from './editorSections';
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 import IconButton from '../ui/IconButton';
 import getDefaultNewTemplate from './defaultNewTemplate';
+import juice from 'juice';
 
 interface Props {
   html: string;
@@ -21,6 +22,7 @@ const EmailTemplateEditor: FC<Props> = ({ html, saveOutput, editorRef }) => {
 
     editor.on('load', () => {
       const defaultTemplate = getDefaultNewTemplate();
+      console.log(html, 'html');
       loadOutput(html.length > 0 ? html : defaultTemplate);
     });
   };
@@ -34,8 +36,10 @@ const EmailTemplateEditor: FC<Props> = ({ html, saveOutput, editorRef }) => {
 
       if (styleElement) {
         const css = styleElement.textContent || '';
+        const inlinedHtml = juice.inlineContent(html, css);
+        editorRef.current.setComponents(inlinedHtml);
+      } else {
         editorRef.current.setComponents(html);
-        editorRef.current.setStyle(css);
       }
     }
   };

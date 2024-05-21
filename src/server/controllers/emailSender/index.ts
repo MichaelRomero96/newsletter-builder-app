@@ -7,8 +7,12 @@ class EmailSenderController {
   public static async sendEmail(templateId: number, email: ISendEmail) {
     try {
       const emailSenderService = EmailSenderService.getInstance();
+      console.log(emailSenderService);
+      console.log(email);
       const sentEmail: CreateEmailSenderEmailResponse =
         await emailSenderService.emails.send(email);
+
+      console.log(sentEmail);
 
       if (sentEmail.error || !sentEmail.data) {
         throw new Error('Error sending email');
