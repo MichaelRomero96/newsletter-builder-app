@@ -15,11 +15,11 @@ class EmailSenderController {
       // the email comes in this format: "name@domain.com"
       // the email could be in this format: "<Name> email@domain.com"
       // if it is, we need to just send the domain to 'resend.dev' keeping in mind the format
-      if (parsedEmail.includes('<')) {
+      /* if (parsedEmail.includes('<')) {
         parsedEmail = `<${parsedEmail.split('<')[1]}`;
       } else if (!parsedEmail.includes('@resend.dev')) {
         parsedEmail = `${parsedEmail.split('@')[0]}@resend.dev`;
-      }
+      } */
 
       const emailSenderService = EmailSenderService.getInstance();
       const sentEmail: CreateEmailSenderEmailResponse =
