@@ -4,20 +4,24 @@ LucideAArrowUp;
 import './styles.css';
 import { LucideAArrowUp, SaveIcon } from 'lucide-react';
 import setEditorSections from './editorSections';
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
 import IconButton from '../ui/IconButton';
 import getDefaultNewTemplate from './defaultNewTemplate';
 
-export default function EmailTemplateEditor() {
-  const editorRef = useRef<Editor | null>(null);
+interface Props {
+  html: string;
+  saveOutput: () => void;
+  editorRef: React.RefObject<Editor | null>;
+}
 
+const EmailTemplateEditor: FC<Props> = ({ html, saveOutput, editorRef }) => {
   const onEditor = (editor: Editor) => {
     setEditorSections(editor);
     editorRef.current = editor;
 
     editor.on('load', () => {
       const defaultTemplate = getDefaultNewTemplate();
-      loadOutput(defaultTemplate);
+      loadOutput(html.length > 0 ? html : defaultTemplate);
     });
   };
 
@@ -33,14 +37,6 @@ export default function EmailTemplateEditor() {
         editorRef.current.setComponents(html);
         editorRef.current.setStyle(css);
       }
-    }
-  };
-
-  const saveOutput = () => {
-    if (editorRef.current) {
-      const html = editorRef.current.getHtml();
-      const css = editorRef.current.getCss();
-      const styledHtml = `<style>${css}</style>${html}`;
     }
   };
 
@@ -64,4 +60,6 @@ export default function EmailTemplateEditor() {
       </div>
     </>
   );
-}
+};
+
+export default EmailTemplateEditor;

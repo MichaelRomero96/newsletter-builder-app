@@ -3,9 +3,9 @@ export interface IEmailTemplate {
   name: string;
   subject: string;
   from: string;
-  body: string;
-  createdAt: string;
-  updatedAt: string;
+  html: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ICreateEmailTemplate {

@@ -33,6 +33,34 @@ class EmailTemplatesAPI {
     }
     return response.json();
   }
+
+  public static async getById(templateId: string) {
+    const response = await fetch(
+      `/api/dashboard/email-templates/${templateId}`
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to get email template');
+    }
+    return response.json();
+  }
+
+  public static async update(templateId: string, data: ICreateEmailTemplate) {
+    const response = await fetch(
+      `/api/dashboard/email-templates/${templateId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    if (!response.ok) {
+      throw new Error('Failed to update email template');
+    }
+    return response.json();
+  }
 }
 
 export default EmailTemplatesAPI;

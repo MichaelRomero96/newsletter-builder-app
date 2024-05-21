@@ -6,6 +6,10 @@
 	background-color: #fff !important;
 }
 
+.gjs-editor-wrapper {
+	height: 80vh !important;
+}
+
 /* Change the color of the text in the panels */
 .gjs-pn-panels * {
 	color: rgb(202, 202, 202) !important;

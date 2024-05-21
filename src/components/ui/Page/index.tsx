@@ -23,7 +23,7 @@ interface Action {
 const Header: FC<HeaderProps> = ({ title, toolbarActions }) => {
   return (
     <div className="flex">
-      <h1 className="size-5 text-2xl w-10 grow">{title}</h1>
+      <h1 className="size-5 font-bold text-2xl w-10 grow">{title}</h1>
       {toolbarActions && <Toolbar actions={toolbarActions} />}
     </div>
   );

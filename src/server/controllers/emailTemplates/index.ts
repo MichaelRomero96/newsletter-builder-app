@@ -18,6 +18,19 @@ class EmailTemplatesController {
     }
   }
 
+  public static async getById(templateId: number) {
+    try {
+      const template = await db.emailTemplate.findUnique({
+        where: {
+          id: templateId,
+        },
+      });
+      return Promise.resolve(template);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  }
+
   public static async create(
     userId: number,
     template: Prisma.EmailTemplateCreateInput
