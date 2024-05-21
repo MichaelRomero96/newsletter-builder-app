@@ -3,7 +3,6 @@ import MainLayout from '@/components/MainLayout';
 import { SessionProvider } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import React, { FC } from 'react';
-import { useSessionStore } from '../../store';
 
 interface Props {
   children: React.ReactNode;
